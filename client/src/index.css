@@ -1,0 +1,38 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+@keyframes slideDown1 {
+  0% { transform: translateY(-120px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+@keyframes slideUp {
+  0% { transform: translateY(120px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+@keyframes slideDown2 {
+  0% { transform: translateY(-120px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { opacity: 0; }
+}
+.animate-slide-down1 { animation: slideDown1 1s cubic-bezier(.68,-0.55,.27,1.55) 0.2s both; }
+.animate-slide-up { animation: slideUp 1s cubic-bezier(.68,-0.55,.27,1.55) 0.4s both; }
+.animate-slide-down2 { animation: slideDown2 1s cubic-bezier(.68,-0.55,.27,1.55) 0.6s both; }
+.fade-in-out {
+  animation: fadeInOut 2s ease-in-out infinite;
+}

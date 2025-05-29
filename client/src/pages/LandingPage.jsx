@@ -1,36 +1,135 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
+import betsubara1st from "../assets/betsubara-1st.jpg";
+import betsubara2nd from "../assets/betsubara-2nd.jpg";
+import betsubara3rd from "../assets/betsubara-3rd.jpg";
+import takoyakiImg from "../assets/takoyaki.jpg";
+import torigaraRamenImg from "../assets/torigara-shoyu-ramen.jpg";
+import hakataRamenImg from "../assets/hakata-ramen.jpg";
+import betsubaraOur from "../assets/betsubara-our.jpg";
+import betsubaraPhilosophy from "../assets/betsubara-philosophy.jpg";
+import taiyaki from "../assets/taiyaki.jpg";
+import yakisoba from "../assets/betsubara-yakisoba.jpg";
+import spicyMisoRamen from "../assets/spicy-miso-ramen.jpg";
 
 const featuredMenu = [
 	{
-		name: "Sakura Sushi Platter",
+		name: "Takoyaki",
 		description:
-			"A delightful assortment of fresh nigiri and maki, garnished with edible sakura petals.",
+			"A beloved Japanese street food, takoyaki are golden, crispy batter balls filled with tender octopus, green onions, and pickled ginger, then topped with savory sauce, creamy mayo, bonito flakes, and seaweed powder.",
 		price: "₱850",
-		image:
-			"https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80",
+		image: takoyakiImg,
 	},
 	{
-		name: "Wagyu Donburi",
+		name: "Hakata Ramen",
 		description:
-			"Premium wagyu beef slices over fluffy Japanese rice, topped with a soft-boiled egg.",
-		price: "₱1200",
-		image:
-			"https://images.unsplash.com/photo-1464306076886-debca5e8a6b0?auto=format&fit=crop&w=400&q=80",
+			"A rich and flavorful dish from Fukuoka, Hakata Ramen features creamy tonkotsu (pork bone) broth, thin straight noodles, tender chashu pork, and classic toppings like green onions, pickled ginger, and sesame seeds.",
+		price: "₱295",
+		image: hakataRamenImg,
 	},
 	{
-		name: "Matcha Blossom Parfait",
-		description: "Layers of matcha ice cream, mochi, and pink sakura jelly.",
-		price: "₱350",
-		image:
-			"https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80",
+		name: "Torigara Shoyu Ramen",
+		description: "A comforting classic, Torigara Shoyu Ramen features a clear chicken bone broth seasoned with soy sauce, served with curly noodles, tender slices of chicken, bamboo shoots, nori, and a soft-boiled egg.",
+		price: "₱320",
+		image: torigaraRamenImg,
+	},
+	{
+		name: "Taiyaki",
+		description: "A delightful Japanese treat, Taiyaki is a fish-shaped cake with a crispy outer shell and a warm, fluffy interior, traditionally filled with sweet red bean paste, custard, chocolate, or cheese.",
+		price: "₱45 each",
+		image: taiyaki,
+	},
+	{
+		name: "Spicy Miso Ramen",
+		description: "A bold and savory favorite, Spicy Miso Ramen features a rich miso-based broth infused with chili oil and spices, served with chewy noodles, ground pork, corn, green onions, and a soft-boiled egg.",
+		price: "₱275",
+		image: spicyMisoRamen,
+	},
+	{
+		name: "Yakisoba",
+		description: "A savory stir-fried noodle dish, Yakisoba features chewy wheat noodles cooked with a medley of vegetables and your choice of protein, all tossed in a tangy sauce.",
+		price: "₱199",
+		image: yakisoba, 
+	},
+	{
+		name: "Tantanmen",
+		description: "A spicy noodle dish, Tantanmen features a rich sesame and chili oil broth, served with chewy noodles, ground pork, bok choy, and a soft-boiled egg.",
+		price: "₱295",
+		image: yakisoba, 
+	},
+	{
+		name: "Mayu Ramen",
+		description: "Mayu Ramen is a flavorful ramen dish made with rich tonkotsu broth and topped with mayu—aromatic black garlic oil—adding a deep, smoky flavor, along with tender pork, noodles, green onions, and a soft-boiled egg.",
+		price: "₱275",
+		image: yakisoba, 
+	},
+	{
+		name: "Salmon Aburi Roll",
+		description: "Mouthwatering salmon belly is lightly seared and served on a bed of sushi rice, topped with a drizzle of spicy mayo and a sprinkle of sesame seeds.",
+		price: "₱350(/8 pcs)",
+		image: yakisoba, 
+	},
+	{
+		name: "Bento Box",
+		description: "Bento is a traditional Japanese single-portion meal box, artfully arranged with a balanced variety of dishes such as rice, grilled meat or fish, pickled vegetables, and side items, perfect for a convenient and satisfying meal.",
+		price: "₱800",
+		image: yakisoba, 
 	},
 ];
 
 const ratings = [
-	{ name: "Anna", comment: "A beautiful and authentic Japanese experience!", stars: 5, food: "Sakura Sushi Platter", foodImage: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80" },
-	{ name: "Kenji", comment: "The sushi platter is a must-try. Will come back!", stars: 4, food: "Wagyu Donburi", foodImage: "https://images.unsplash.com/photo-1464306076886-debca5e8a6b0?auto=format&fit=crop&w=400&q=80" },
-	{ name: "Mika", comment: "Loved the ambiance and the sakura decor.", stars: 5, food: "Matcha Blossom Parfait", foodImage: "https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80" }
+	{
+		stars: 5,
+		food: "Takoyaki",
+		foodImage: takoyakiImg,
+		comment: "Crispy outside, creamy inside! The best takoyaki I've had outside Japan.",
+	},
+	{
+		stars: 4,
+		food: "Hakata Ramen",
+		foodImage: hakataRamenImg,
+		comment: "Rich, flavorful broth and perfectly cooked noodles. A must-try for ramen lovers.",
+	},
+	{
+		stars: 5,
+		food: "Torigara Shoyu Ramen",
+		foodImage: torigaraRamenImg,
+		comment: "Light yet deeply satisfying. The chicken is so tender!",
+	},
+	{
+		stars: 4,
+		food: "Taiyaki",
+		foodImage: taiyaki,
+		comment: "Warm, sweet, and comforting. The red bean filling is delicious.",
+	},
+	{
+		stars: 5,
+		food: "Spicy Miso Ramen",
+		foodImage: spicyMisoRamen,
+		comment: "Perfect level of spice and umami. Warms you up instantly!",
+	},
+	{
+		stars: 4,
+		food: "Yakisoba",
+		foodImage: yakisoba,
+		comment: "Savory, saucy, and packed with veggies. Great comfort food.",
+	},
 ];
+
+function useSectionReveal() {
+	const ref = useRef();
+	const [visible, setVisible] = useState(false);
+	useEffect(() => {
+		const node = ref.current;
+		if (!node) return;
+		const observer = new window.IntersectionObserver(
+			([entry]) => setVisible(entry.isIntersecting),
+			{ threshold: 0.15 }
+		);
+		observer.observe(node);
+		return () => observer.disconnect();
+	}, []);
+	return [ref, visible];
+}
 
 function AnimatedBetsubara() {
 	const [showJP, setShowJP] = React.useState(false);
@@ -40,206 +139,324 @@ function AnimatedBetsubara() {
 	}, []);
 	return (
 		<h1 className="text-5xl md:text-6xl font-bold tracking-wider text-black mb-2 drop-shadow transition-all duration-700 min-h-[1.2em]">
-			{showJP ? <span className="transition-opacity duration-700">べつばら</span> : <span className="transition-opacity duration-700">Betsubara</span>}
+			{showJP ? (
+				<span className="transition-opacity duration-700">べつばら</span>
+			) : (
+				<span className="transition-opacity duration-700">Betsubara</span>
+			)}
 		</h1>
 	);
 }
 
 export default function LandingPage() {
-	return (
-		<div className="font-[\'Noto Sans JP\'], font-serif bg-white text-black w-screen min-h-screen overflow-x-hidden">
+	const [currentRating, setCurrentRating] = useState(0);
+	React.useEffect(() => {
+		const timer = setInterval(
+			() => setCurrentRating((r) => (r + 1) % ratings.length),
+			3500
+		);
+		return () => clearInterval(timer);
+	}, []);
 
-			<section className="w-screen min-h-[80vh] flex flex-col md:flex-row items-center justify-center bg-white relative overflow-hidden px-4 md:px-24 lg:px-32 xl:px-48 2xl:px-64">
+	const [welcomeRef, welcomeVisible] = useSectionReveal();
+	const [favMenuRef, favMenuVisible] = useSectionReveal();
+	const [storyRef, storyVisible] = useSectionReveal();
+	const [menuRef, menuVisible] = useSectionReveal();
+	const [locationRef, locationVisible] = useSectionReveal();
+	const [ratingsRef, ratingsVisible] = useSectionReveal();
+	const [aboutRef, aboutVisible] = useSectionReveal();
+
+	return (
+		<div className="font-['Poppins'], font-sans bg-white text-black w-screen min-h-screen overflow-x-hidden">
+			<section
+				ref={welcomeRef}
+				className={`w-screen min-h-[80vh] flex flex-col md:flex-row items-center justify-center bg-white relative overflow-hidden px-4 md:px-24 lg:px-32 xl:px-48 2xl:px-64 transition-all duration-700 ${
+					welcomeVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+				}`}
+			>
 				<div className="hidden md:flex flex-row gap-8 h-[320px] justify-center items-center relative w-1/2 pr-10">
 					<img
-						src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80"
+						src={betsubara1st}
 						alt="Sakura Sushi Platter"
 						className="w-[200px] h-[450px] object-cover shadow-lg animate-slide-down1"
-						style={{ animation: 'slideDown1 1s cubic-bezier(.68,-0.55,.27,1.55) 0.2s both' }}
-						width={140} height={320}
+						style={{
+							animation:
+								"slideDown1 1s cubic-bezier(.68,-0.55,.27,1.55) 0.2s both",
+						}}
+						width={140}
+						height={320}
 					/>
 					<img
-						src="https://images.unsplash.com/photo-1464306076886-debca5e8a6b0?auto=format&fit=crop&w=400&q=80"
+						src={betsubara2nd}
 						alt="Wagyu Donburi"
 						className="w-[200px] h-[450px] object-cover shadow-lg animate-slide-up"
-						style={{ animation: 'slideUp 1s cubic-bezier(.68,-0.55,.27,1.55) 0.4s both' }}
-						width={140} height={320}
+						style={{
+							animation:
+								"slideUp 1s cubic-bezier(.68,-0.55,.27,1.55) 0.4s both",
+						}}
+						width={140}
+						height={320}
 					/>
 					<img
-						src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80"
+						src={betsubara3rd}
 						alt="Matcha Blossom Parfait"
 						className="w-[200px] h-[450px] object-cover shadow-lg animate-slide-down2"
-						style={{ animation: 'slideDown2 1s cubic-bezier(.68,-0.55,.27,1.55) 0.6s both' }}
-						width={140} height={320}
+						style={{
+							animation:
+								"slideDown2 1s cubic-bezier(.68,-0.55,.27,1.55) 0.6s both",
+						}}
+						width={140}
+						height={320}
 					/>
 				</div>
 
 				<div className="flex-1 flex flex-col items-center md:items-start justify-center z-10 md:pl-16">
 					<AnimatedBetsubara />
 					<p className="text-xl md:text-2xl text-gray-700 mb-6">
-					"Where Every Meal is a New Beginning"
+						"Where Every Meal is a New Beginning"
 					</p>
 				</div>
 			</section>
-
-			<section className="w-screen py-16 px-4 bg-white flex flex-col items-center">
-				<h2 className="text-3xl md:text-4xl font-bold text-black mb-2">Our Favorite Menu</h2>
+			<section
+				ref={favMenuRef}
+				className={`w-screen py-16 px-4 bg-white flex flex-col items-center transition-all duration-700 ${
+					favMenuVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+				}`}
+			>
+				<h2 className="text-3xl md:text-4xl font-bold text-black mb-2">
+					Our Favorite Menu
+				</h2>
 				<p className="text-lg text-gray-600 mb-10 max-w-2xl text-center">
-					Discover the dishes our guests and chefs love the most. Each plate is crafted with passion and the finest ingredients, bringing a taste of Japan to your table.
+					Discover the dishes our guests and chefs love the most. Each plate is
+					crafted with passion and the finest ingredients, bringing a taste of Japan
+					to your table.
 				</p>
 				<div className="flex flex-col md:flex-row gap-8 w-full max-w-6xl justify-center items-stretch">
-					{featuredMenu.map((item) => (
-						<div key={item.name} className="flex-1 flex flex-col items-center bg-white shadow-lg">
+					{featuredMenu.slice(0, 3).map((item) => (
+						<div
+							key={item.name}
+							className="flex-1 flex flex-col items-center bg-white shadow-lg"
+						>
 							<img
 								src={item.image}
 								alt={item.name}
 								className="w-full h-80 md:h-80 object-cover mb-4"
-								style={{ minWidth: '450px', maxWidth: '150%' }}
+								style={{ minWidth: "450px", maxWidth: "150%" }}
 							/>
 							<div className="px-4 pb-6 w-full">
-								<h3 className="text-2xl font-bold text-pink-600 mb-2 text-center">{item.name}</h3>
-								<p className="text-gray-700 text-base text-center">{item.description}</p>
+								<h3 className="text-2xl font-bold text-[#ffb6d5] mb-2 text-center">
+									{item.name}
+								</h3>
+								<p className="text-gray-700 text-base text-center">
+									{item.description}
+								</p>
+								<div className="text-lg font-bold text-[#ffb6d5] text-center mt-2">
+									{item.price}
+								</div>
 							</div>
 						</div>
 					))}
 				</div>
 			</section>
-			
-			<section className="w-screen py-25 px-4 bg-white/90 flex flex-col md:flex-row items-center md:items-start min-h-[500px]" id="story">
-  <div className="flex-1 flex flex-col justify-center mb-8 md:mb-0 md:mr-8 items-center">
-    <div className="flex flex-col items-center justify-center h-full w-full">
-      <h2 className="border-l-4 border-black pl-2 text-2xl font-normal mb-4 text-center w-full">
-        Our Philosophy
-      </h2>
-      <h3 className="text-xl font-bold mb-2 text-center w-full">Beyond The Boundaries of Taste</h3>
-      <p className="max-w-2xl text-lg text-center mx-auto">
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-      </p>
-    </div>
-  </div>
-  <div className="flex-1 flex flex-col md:flex-row gap-6 justify-center items-center w-full md:w-auto">
-    <img
-      src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80"
-      alt="Japanese Restaurant Interior 1"
-      className="w-[100vw] md:w-[420px] h-96 md:h-[600px] object-cover shadow-xl"
-      style={{ borderRadius: 0 }}
-    />
-    <img
-      src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=700&q=80"
-      alt="Japanese Restaurant Interior 2"
-      className="w-[100vw] md:w-[300px] h-106 md:h-[600px] object-cover shadow-xl"
-      style={{ borderRadius: 0 }}
-    />
-  </div>
-</section>
+
+			<section
+				ref={storyRef}
+				className={`w-screen py-25 px-4 bg-white/90 flex flex-col md:flex-row items-center md:items-start min-h-[500px] transition-all duration-700 ${
+					storyVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+				}`}
+				id="story"
+			>
+				<div className="flex-1 flex flex-col justify-center mb-8 md:mb-0 md:mr-8 items-center md:items-start">
+					<h2 className="border-l-4 border-black pl-2 text-4xl font-normal mb-4 w-full text-left md:text-left">
+						Our Philosophy
+					</h2>
+					<h3 className="text-xl font-bold mb-2 w-full text-left md:text-left">
+						Beyond The Boundaries of Taste
+					</h3>
+					<p className="max-w-2xl text-xl md:text-2xl mx-auto md:mx-0 text-left">
+						At Betsubara Café, we believe that every meal is a moment to nourish not only the body but also the soul. Inspired by the Japanese concept of "betsubara"—the idea of always having room for something sweet—we strive to create an experience where comfort, tradition, and creativity come together. From thoughtfully prepared dishes to warm, welcoming service, our philosophy is rooted in sharing joy through authentic flavors, mindful presentation, and a space where everyone feels at home.
+					</p>
+				</div>
+				<div className="flex-1 flex flex-col md:flex-row gap-6 justify-center items-center w-full md:w-auto">
+					<img
+						src={betsubaraPhilosophy}
+						alt="Japanese Restaurant Philosophy"
+						className="w-[100vw] md:w-[420px] h-96 md:h-[600px] object-cover shadow-xl"
+						style={{ borderRadius: 0 }}
+					/>
+					<img
+						src={betsubaraOur}
+						alt="Japanese Restaurant Our Story"
+						className="w-[100vw] md:w-[300px] h-106 md:h-[600px] object-cover shadow-xl"
+						style={{ borderRadius: 0 }}
+					/>
+				</div>
+			</section>
 
 			{/* Featured Menu Items */}
-			<section className="w-screen bg-black/5 text-black py-12 px-4 flex flex-col items-center" id="menu">
-  <h2 className="border-l-4 border-black-300 pl-2 text-2xl font-normal mb-10 text-center w-full">
-    Featured Menu
-  </h2>
-  <div className="flex flex-col md:flex-row justify-center items-start gap-12 w-full max-w-6xl mx-auto">
-    {/* Left column */}
-    <div className="flex-1 flex flex-col gap-10 items-end">
-      {featuredMenu.slice(0, 5).map((item, idx) => (
-        <div key={item.name} className="w-full max-w-md">
-          <div className="flex items-center justify-between w-full">
-            <span className="text-3xl md:text-4xl font-bold text-black text-right w-2/3">{item.name}</span>
-            <span className="flex-1 border-b border-gray-300 mx-4"></span>
-            <span className="text-2xl md:text-3xl font-bold text-pink-600 whitespace-nowrap">{item.price}</span>
-          </div>
-          <p className="text-lg text-gray-700 mt-2 text-right w-full">{item.description}</p>
-        </div>
-      ))}
-    </div>
-    {/* Right column */}
-    <div className="flex-1 flex flex-col gap-10 items-start">
-      {featuredMenu.slice(5, 10).map((item, idx) => (
-        <div key={item.name} className="w-full max-w-md">
-          <div className="flex items-center justify-between w-full">
-            <span className="text-3xl md:text-4xl font-bold text-black w-2/3">{item.name}</span>
-            <span className="flex-1 border-b border-gray-300 mx-4"></span>
-            <span className="text-2xl md:text-3xl font-bold text-pink-600 whitespace-nowrap">{item.price}</span>
-          </div>
-          <p className="text-lg text-gray-700 mt-2 w-full">{item.description}</p>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
+			<section
+				ref={menuRef}
+				className={`w-screen bg-black/5 text-black py-12 px-4 flex flex-col items-center transition-all duration-700 ${
+					menuVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+				}`}
+				id="menu"
+			>
+				<h2 className="border-l-4 border-black-300 pl-2 text-4xl font-normal mb-10 w-full text-left md:text-left">
+					Featured Menu
+				</h2>
+				<div className="flex flex-col md:flex-row justify-center items-start gap-12 w-full max-w-6xl mx-auto">
+					{/* Left column */}
+					<div className="flex-1 flex flex-col gap-10 items-end">
+						{featuredMenu.slice(0, 5).map((item, idx) => (
+							<div key={item.name} className="w-full max-w-md">
+								<div className="flex items-center justify-between w-full">
+									<span className="text-3xl md:text-4xl font-bold text-black text-right w-2/3">
+										{item.name}
+									</span>
+									<span className="flex-1 border-b border-gray-300 mx-4"></span>
+									<span className="text-2xl md:text-3xl font-bold text-[#ffb6d5] whitespace-nowrap">
+										{item.price}
+									</span>
+								</div>
+								<p className="text-lg text-gray-700 mt-2 text-right w-full">
+									{item.description}
+								</p>
+							</div>
+						))}
+					</div>
+					{/* Right column */}
+					<div className="flex-1 flex flex-col gap-10 items-start">
+						{featuredMenu.slice(5, 10).map((item, idx) => (
+							<div key={item.name} className="w-full max-w-md">
+								<div className="flex items-center justify-between w-full">
+									<span className="text-3xl md:text-4xl font-bold text-black w-2/3">
+										{item.name}
+									</span>
+									<span className="flex-1 border-b border-gray-300 mx-4"></span>
+									<span className="text-2xl md:text-3xl font-bold text-[#ffb6d5] whitespace-nowrap">
+										{item.price}
+									</span>
+								</div>
+								<p className="text-lg text-gray-700 mt-2 w-full">
+									{item.description}
+								</p>
+							</div>
+						))}
+					</div>
+				</div>
+			</section>
 
-			<section className="w-screen py-30 px-4 bg-white/90 flex justify-center items-center" id="location">
-  <div className="w-full max-w-7xl bg-white rounded-2xl shadow-2xl flex flex-col md:flex-row overflow-hidden scale-105 md:scale-110">
-    <div className="flex-1 p-8 flex flex-col justify-center">
-      <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">Visit Our Location
-      </h2>
-      <p className="text-lg text-gray-700 mb-4">Come experience the cozy ambiance and delicious offerings at Felisa's.</p>
-      <div className="mb-4">
-        <div className="font-bold text-gray-900 mb-1">Address:</div>
-        <div className="text-gray-700">Bintawan Road, Poblacion South, Solano, Nueva Vizcaya, 3700</div>
-      </div>
-      <div className="mb-4">
-        <div className="font-bold text-gray-900 mb-1">Hours:</div>
-        <div className="text-gray-700">Always Open from 11 am to 8 pm</div>
-      </div>
-      <div>
-        <div className="font-bold text-gray-900 mb-1">Contact:</div>
-        <div className="text-gray-700">Phone: (+63)912345678</div>
-      </div>
-    </div>
+			<section
+				ref={locationRef}
+				className={`w-screen py-30 px-4 bg-white/90 flex justify-center items-center transition-all duration-700 ${
+					locationVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+				}`}
+				id="location"
+			>
+				<div className="w-full max-w-7xl bg-white rounded-2xl shadow-2xl flex flex-col md:flex-row overflow-hidden scale-105 md:scale-110">
+					<div className="flex-1 p-8 flex flex-col justify-center">
+						<h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+							Visit Our Location
+						</h2>
+						<p className="text-lg text-gray-700 mb-4">
+							Betusbara is a Japanese-themed restaurant offering an authentic dining
+							experience with traditional flavors, elegant décor, and a serene ambiance
+							inspired by Japan’s rich culinary heritage.
+						</p>
+						<div className="mb-4">
+							<div className="font-bold text-gray-900 mb-1">Address:</div>
+							<div className="text-gray-700">
+								Bintawan Road, Poblacion South, Solano, Nueva Vizcaya, 3700
+							</div>
+						</div>
+						<div className="mb-4">
+							<div className="font-bold text-gray-900 mb-1">Hours:</div>
+							<div className="text-gray-700">Always Open from 11 am to 8 pm</div>
+						</div>
+						<div>
+							<div className="font-bold text-gray-900 mb-1">Contact:</div>
+							<div className="text-gray-700">Phone: (+63)912345678</div>
+						</div>
+					</div>
 
-    <div className="flex-1 min-h-[300px] flex items-center justify-center bg-gray-50">
-      <iframe
-        title="Betsubara Location"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3825.1582960192236!2d121.17645127329365!3d16.51810422726861!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x339041fc16284dad%3A0x7c61943a2e131fb0!2sBetsubara%20Cafe!5e0!3m2!1sen!2sph!4v1748448673553!5m2!1sen!2sph"
-        width="100%"
-        height="320"
-        className="border-0 w-full h-full min-h-[250px] max-w-xl rounded-none"
-        allowFullScreen=""
-        loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-      ></iframe>
-    </div>
-  </div>
-</section>
+					<div className="flex-1 min-h-[300px] flex items-center justify-center bg-gray-50">
+						<iframe
+							title="Betsubara Location"
+							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3825.1582960192236!2d121.17645127329365!3d16.51810422726861!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x339041fc16284dad%3A0x7c61943a2e131fb0!2sBetsubara%20Cafe!5e0!3m2!1sen!2sph!4v1748448673553!5m2!1sen!2sph"
+							width="100%"
+							height="320"
+							className="border-0 w-full h-full min-h-[250px] max-w-xl rounded-none"
+							allowFullScreen=""
+							loading="lazy"
+							referrerPolicy="no-referrer-when-downgrade"
+						></iframe>
+					</div>
+				</div>
+			</section>
 
 			{/* Ratings */}
-			<section className="w-screen bg-pink-50 text-black py-12 px-4" id="ratings">
-				<h2 className="border-l-4 border-black pl-2 text-2xl font-semibold mb-8 flex items-center gap-2">
-				 Customer Ratings
-				</h2>
-				<div className="flex flex-wrap justify-center gap-8 mt-4">
-					{ratings.map((r, idx) => (
-						<div key={idx} className="bg-white/90 text-black rounded-xl shadow-lg w-56 p-5 flex flex-col items-center">
-							<img src={r.foodImage} alt={r.food + ' review'} className="w-20 h-20 rounded-xl object-cover mb-3 border-2 border-pink-300 shadow" />
-							<div className="font-bold mb-1 text-pink-600 flex items-center gap-2">🍱 {r.food}</div>
-							<div className="font-bold mb-1 flex items-center gap-2"><span className="text-gray-400">👤</span>{r.name}</div>
-							<div className="mb-2 text-pink-500 text-lg flex">
-								{Array.from({ length: 5 }).map((_, i) =>
-									<span key={i}>{i < r.stars ? '★' : '☆'}</span>
-								)}
+			<section
+				ref={ratingsRef}
+				className={`w-screen bg-[#ffe4ec] text-black py-12 px-4 flex flex-col items-center transition-all duration-700 ${
+					ratingsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+				}`}
+				id="ratings"
+			>
+				<div className="w-full max-w-5xl mx-auto">
+					<h2 className="border-l-4 border-black pl-2 text-4xl font-normal mb-4 w-full text-left md:text-left">
+						Customer Ratings
+					</h2>
+					<p className="text-lg text-gray-600 mb-8 w-full max-w-3xl text-left md:text-left">
+						See what our customers are saying about their favorite dishes! Honest reviews and real experiences help you choose your next meal with confidence.
+					</p>
+				</div>
+				<div className="flex justify-center w-full">
+					<div
+						key={currentRating}
+						className="bg-white/90 rounded-2xl shadow-2xl w-full max-w-5xl h-[420px] flex flex-col md:flex-row items-center overflow-hidden mx-4 transition-opacity duration-700"
+						style={{ opacity: 1 }}
+					>
+						<img
+							src={ratings[currentRating].foodImage}
+							alt={ratings[currentRating].food}
+							className="w-full md:w-1/2 h-60 md:h-full object-cover"
+							style={{ minHeight: 260, maxHeight: 420 }}
+						/>
+						<div className="flex flex-col justify-center flex-1 w-full p-8">
+							<div className="font-bold mb-2 text-[#ffb6d5] text-2xl md:text-3xl">
+								{ratings[currentRating].food}
 							</div>
-							<div className="italic text-base text-center">{r.comment}</div>
+							<div className="mb-2 text-[#ffb6d5] text-xl flex">
+								{Array.from({ length: 5 }).map((_, i) => (
+									<span key={i}>
+										{i < ratings[currentRating].stars ? (
+											<span className="text-[#ffb6d5]">★</span>
+										) : (
+											<span className="text-gray-300">☆</span>
+										)}
+									</span>
+								))}
+							</div>
+							<div className="italic text-lg text-gray-700">
+								{ratings[currentRating].comment}
+							</div>
 						</div>
+					</div>
+				</div>
+				<div className="flex justify-center gap-2 mt-4">
+					{ratings.map((_, idx) => (
+						<button
+							key={idx}
+							onClick={() => setCurrentRating(idx)}
+							className={`w-3 h-3 rounded-full ${
+								idx === currentRating ? "bg-[#ffb6d5]" : "bg-gray-300"
+							}`}
+							aria-label={`Go to rating ${idx + 1}`}
+						/>
 					))}
 				</div>
 			</section>
 
-			{/* About Us */}
-			<section className="w-screen py-12 px-4 bg-white/90" id="about">
-				<h2 className="border-l-4 border-black pl-2 text-2xl font-semibold mb-4">
-					About Us
-				</h2>
-				<p className="max-w-2xl mx-auto text-lg">
-					At Betsubara, we blend tradition and creativity to bring you the best of
-					Japanese cuisine. Our chefs use only the freshest ingredients, and our
-					team is dedicated to making every visit special. Whether you're here for
-					a quick lunch or a celebratory dinner, we welcome you with open arms and
-					a touch of sakura magic.
-				</p>
-			</section>
-
-			{/* Footer */}
 			<footer className="w-screen bg-black text-white text-center py-6 text-base tracking-wide bg-opacity-90">
 				© {new Date().getFullYear()} Betsubara | Crafted with{" "}
 				<span className="text-pink-300">❀</span> in Nueva Vizcaya

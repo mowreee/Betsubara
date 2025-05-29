@@ -215,6 +215,12 @@ export default function LandingPage() {
 					<p className="text-xl md:text-2xl text-gray-700 mb-6">
 						"Where Every Meal is a New Beginning"
 					</p>
+					<a
+						href="/menu"
+						className="inline-block mt-2 px-8 py-3 rounded-full bg-[#ffb6d5] text-white font-semibold text-lg shadow-md hover:bg-[#ff8fcf] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#ffb6d5] focus:ring-offset-2"
+					>
+						View Our Menu
+					</a>
 				</div>
 			</section>
 			<section

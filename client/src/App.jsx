@@ -17,8 +17,8 @@ import Navbar from './components/Navbar'
 function App() {
   const [count, setCount] = useState(0)
   const location = useLocation();
-  // Hide Navbar only on /login and /register
-  const hideNavbar = location.pathname === '/login' || location.pathname === '/register';
+  // Hide Navbar on /login, /register, and all /admin routes
+  const hideNavbar = location.pathname === '/login' || location.pathname === '/register' || location.pathname.startsWith('/admin');
   // Show sidebar only on /admin and its subroutes
   const showSidebar = location.pathname.startsWith('/admin');
 

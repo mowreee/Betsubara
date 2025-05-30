@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const adminLinks = [
+  { to: "/admin", label: "Admin Dashboard", icon: "🏠" },
   { to: "/admin/manage-menu", label: "Manage Menu", icon: "📋" },
   { to: "/admin/manage-users", label: "Manage Users", icon: "👥" },
 ];
@@ -9,11 +10,11 @@ const adminLinks = [
 export default function SidebarAdmin() {
   const location = useLocation();
   return (
-    <aside className="bg-white dark:bg-[#3a2230] shadow-lg h-full w-64 flex flex-col py-8 px-4">
+    <aside className="bg-white dark:bg-[#3a2230] shadow-lg h-screen w-64 flex flex-col py-8 px-4">
       <div className="mb-8 text-center">
         <h2 className="text-2xl font-bold text-[#a85e7c] dark:text-[#ffe4ec]">Admin Panel</h2>
       </div>
-      <nav className="flex flex-col gap-2">
+      <nav className="flex flex-col gap-2 flex-1">
         {adminLinks.map((link) => (
           <Link
             key={link.to}

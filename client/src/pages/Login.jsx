@@ -10,12 +10,19 @@ export default function Login() {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const navigate = useNavigate();
 
+  // Admin credentials (hardcoded)
+  const ADMIN_EMAIL = "admin@gmail.com";
+  const ADMIN_PASSWORD = "admin12345";
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email || !password) {
       setError("Please enter both email and password.");
-    } else {
-      setError("");
+      return;
+    }
+    setError("");
+    // Check for admin login
+    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
       if (rememberMe) {
         localStorage.setItem("betsubara_admin_email", email);
       } else {
@@ -25,7 +32,13 @@ export default function Login() {
       setTimeout(() => {
         navigate("/admin");
       }, 1200);
+      return;
     }
+    // Otherwise, treat as customer login (no backend check, just redirect)
+    setLoginSuccess(true);
+    setTimeout(() => {
+      navigate("/");
+    }, 1200);
   };
 
   React.useEffect(() => {

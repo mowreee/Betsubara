@@ -138,11 +138,17 @@ function AnimatedBetsubara() {
 		return () => clearInterval(interval);
 	}, []);
 	return (
-		<h1 className="text-5xl md:text-6xl font-bold tracking-wider text-black mb-2 drop-shadow transition-all duration-700 min-h-[1.2em]">
+		<h1 className="text-5xl md:text-6xl font-bold tracking-wider text-black mb-2 drop-shadow transition-all duration-700 min-h-[1.2em] flex flex-col md:flex-row md:items-end gap-1 md:gap-3">
 			{showJP ? (
-				<span className="transition-opacity duration-700">べつばら</span>
+				<span className="transition-opacity duration-700 flex flex-col md:flex-row md:items-end gap-1 md:gap-3">
+					<span>べつばら</span>
+					<span className="text-2xl md:text-3xl text-[#a85e7c] ml-1 md:ml-2">カフェ</span>
+				</span>
 			) : (
-				<span className="transition-opacity duration-700">Betsubara</span>
+				<span className="transition-opacity duration-700 flex flex-col md:flex-row md:items-end gap-1 md:gap-3">
+					<span>Betsubara</span>
+					<span className="text-2xl md:text-3xl text-[#a85e7c] ml-1 md:ml-2">Cafe</span>
+				</span>
 			)}
 		</h1>
 	);

@@ -213,7 +213,7 @@ export default function LandingPage() {
 				<div className="flex-1 flex flex-col items-center md:items-start justify-center z-10 md:pl-16">
 					<AnimatedBetsubara />
 					<p className="text-xl md:text-2xl text-gray-700 mb-6">
-						"Where Every Meal is a New Beginning"
+						"We bring Japan closer to your hearts "
 					</p>
 					<a
 						href="/menu"
@@ -225,7 +225,7 @@ export default function LandingPage() {
 			</section>
 			<section
 				ref={favMenuRef}
-				className={`w-screen py-16 px-4 bg-white flex flex-col items-center transition-all duration-700 ${
+				className={`w-screen py-16 px-2 sm:px-4 bg-white flex flex-col items-center transition-all duration-700 ${
 					favMenuVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
 				}`}
 			>
@@ -267,33 +267,33 @@ export default function LandingPage() {
 
 			<section
 				ref={storyRef}
-				className={`w-screen py-25 px-4 bg-white/90 flex flex-col md:flex-row items-center md:items-start min-h-[500px] transition-all duration-700 ${
+				className={`w-screen py-25 px-2 sm:px-4 bg-white/90 flex flex-col md:flex-row items-center md:items-start min-h-[500px] transition-all duration-700 ${
 					storyVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
 				}`}
 				id="story"
 			>
 				<div className="flex-1 flex flex-col justify-center mb-8 md:mb-0 md:mr-8 items-center md:items-start">
-					<h2 className="border-l-4 border-black pl-2 text-4xl font-normal mb-4 w-full text-left md:text-left">
+					<h2 className="border-l-4 border-black pl-2 text-3xl sm:text-4xl font-normal mb-4 w-full text-left md:text-left">
 						Our Philosophy
 					</h2>
-					<h3 className="text-xl font-bold mb-2 w-full text-left md:text-left">
+					<h3 className="text-lg sm:text-xl font-bold mb-2 w-full text-left md:text-left">
 						Beyond The Boundaries of Taste
 					</h3>
-					<p className="max-w-2xl text-xl md:text-2xl mx-auto md:mx-0 text-left">
+					<p className="max-w-2xl text-base sm:text-xl md:text-2xl mx-auto md:mx-0 text-left">
 						At Betsubara Café, we believe that every meal is a moment to nourish not only the body but also the soul. Inspired by the Japanese concept of "betsubara"—the idea of always having room for something sweet—we strive to create an experience where comfort, tradition, and creativity come together. From thoughtfully prepared dishes to warm, welcoming service, our philosophy is rooted in sharing joy through authentic flavors, mindful presentation, and a space where everyone feels at home.
 					</p>
 				</div>
-				<div className="flex-1 flex flex-col md:flex-row gap-6 justify-center items-center w-full md:w-auto">
+				<div className="flex-1 flex flex-col md:flex-row gap-4 sm:gap-6 justify-center items-center w-full md:w-auto">
 					<img
 						src={betsubaraPhilosophy}
 						alt="Japanese Restaurant Philosophy"
-						className="w-[100vw] md:w-[420px] h-96 md:h-[600px] object-cover shadow-xl"
+						className="w-full max-w-xs sm:max-w-sm md:w-[420px] h-60 sm:h-80 md:h-[600px] object-cover shadow-xl"
 						style={{ borderRadius: 0 }}
 					/>
 					<img
 						src={betsubaraOur}
 						alt="Japanese Restaurant Our Story"
-						className="w-[100vw] md:w-[300px] h-106 md:h-[600px] object-cover shadow-xl"
+						className="w-full max-w-xs sm:max-w-xs md:w-[300px] h-60 sm:h-80 md:h-[600px] object-cover shadow-xl"
 						style={{ borderRadius: 0 }}
 					/>
 				</div>
@@ -307,43 +307,43 @@ export default function LandingPage() {
 				}`}
 				id="menu"
 			>
-				<h2 className="border-l-4 border-black-300 pl-2 text-4xl font-normal mb-10 w-full text-left md:text-left">
+				<h2 className="border-l-4 border-black-300 pl-2 text-3xl md:text-4xl font-normal mb-8 md:mb-10 w-full text-left">
 					Featured Menu
 				</h2>
-				<div className="flex flex-col md:flex-row justify-center items-start gap-12 w-full max-w-6xl mx-auto">
+				<div className="flex flex-col md:flex-row justify-center items-stretch gap-6 md:gap-12 w-full max-w-6xl mx-auto">
 					{/* Left column */}
-					<div className="flex-1 flex flex-col gap-10 items-end">
+					<div className="flex-1 flex flex-col gap-6 md:gap-10 items-end md:items-end">
 						{featuredMenu.slice(0, 5).map((item, idx) => (
-							<div key={item.name} className="w-full max-w-md">
-								<div className="flex items-center justify-between w-full">
-									<span className="text-3xl md:text-4xl font-bold text-black text-right w-2/3">
+							<div key={item.name} className="w-full max-w-md bg-white/80 rounded-xl shadow-md p-4 md:p-6 mb-2 md:mb-0">
+								<div className="flex flex-col sm:flex-row items-end sm:items-center justify-between w-full gap-2">
+									<span className="text-2xl md:text-3xl font-bold text-black text-right w-full sm:w-2/3">
 										{item.name}
 									</span>
-									<span className="flex-1 border-b border-gray-300 mx-4"></span>
-									<span className="text-2xl md:text-3xl font-bold text-[#ffb6d5] whitespace-nowrap">
+									<span className="hidden sm:block flex-1 border-b border-gray-300 mx-4"></span>
+									<span className="text-xl md:text-2xl font-bold text-[#ffb6d5] whitespace-nowrap">
 										{item.price}
 									</span>
 								</div>
-								<p className="text-lg text-gray-700 mt-2 text-right w-full">
+								<p className="text-base md:text-lg text-gray-700 mt-2 text-right w-full">
 									{item.description}
 								</p>
 							</div>
 						))}
 					</div>
 					{/* Right column */}
-					<div className="flex-1 flex flex-col gap-10 items-start">
+					<div className="flex-1 flex flex-col gap-6 md:gap-10 items-start md:items-start">
 						{featuredMenu.slice(5, 10).map((item, idx) => (
-							<div key={item.name} className="w-full max-w-md">
-								<div className="flex items-center justify-between w-full">
-									<span className="text-3xl md:text-4xl font-bold text-black w-2/3">
+							<div key={item.name} className="w-full max-w-md bg-white/80 rounded-xl shadow-md p-4 md:p-6 mb-2 md:mb-0">
+								<div className="flex flex-col sm:flex-row items-start sm:items-center justify-between w-full gap-2">
+									<span className="text-2xl md:text-3xl font-bold text-black w-full sm:w-2/3">
 										{item.name}
 									</span>
-									<span className="flex-1 border-b border-gray-300 mx-4"></span>
-									<span className="text-2xl md:text-3xl font-bold text-[#ffb6d5] whitespace-nowrap">
+									<span className="hidden sm:block flex-1 border-b border-gray-300 mx-4"></span>
+									<span className="text-xl md:text-2xl font-bold text-[#ffb6d5] whitespace-nowrap">
 										{item.price}
 									</span>
 								</div>
-								<p className="text-lg text-gray-700 mt-2 w-full">
+								<p className="text-base md:text-lg text-gray-700 mt-2 w-full">
 									{item.description}
 								</p>
 							</div>
@@ -354,44 +354,40 @@ export default function LandingPage() {
 
 			<section
 				ref={locationRef}
-				className={`w-screen py-30 px-4 bg-white/90 flex justify-center items-center transition-all duration-700 ${
+				className={`w-screen py-16 sm:py-30 px-2 sm:px-4 bg-white/90 flex justify-center items-center transition-all duration-700 ${
 					locationVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
 				}`}
 				id="location"
 			>
-				<div className="w-full max-w-7xl bg-white rounded-2xl shadow-2xl flex flex-col md:flex-row overflow-hidden scale-105 md:scale-110">
-					<div className="flex-1 p-8 flex flex-col justify-center">
-						<h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+				<div className="w-full max-w-7xl bg-white rounded-2xl shadow-2xl flex flex-col md:flex-row overflow-hidden scale-100 md:scale-105">
+					<div className="flex-1 p-4 sm:p-8 flex flex-col justify-center">
+						<h2 className="text-xl sm:text-2xl font-semibold mb-4 flex items-center gap-2">
 							Visit Our Location
 						</h2>
-						<p className="text-lg text-gray-700 mb-4">
+						<p className="text-base sm:text-lg text-gray-700 mb-4">
 							Betusbara is a Japanese-themed restaurant offering an authentic dining
 							experience with traditional flavors, elegant décor, and a serene ambiance
 							inspired by Japan’s rich culinary heritage.
 						</p>
 						<div className="mb-4">
 							<div className="font-bold text-gray-900 mb-1">Address:</div>
-							<div className="text-gray-700">
+							<div className="text-gray-700 text-sm sm:text-base">
 								Bintawan Road, Poblacion South, Solano, Nueva Vizcaya, 3700
 							</div>
 						</div>
 						<div className="mb-4">
 							<div className="font-bold text-gray-900 mb-1">Hours:</div>
-							<div className="text-gray-700">Always Open from 11 am to 8 pm</div>
-						</div>
-						<div>
-							<div className="font-bold text-gray-900 mb-1">Contact:</div>
-							<div className="text-gray-700">Phone: (+63)912345678</div>
+							<div className="text-gray-700 text-sm sm:text-base">Always Open from 11 am to 8 pm</div>
 						</div>
 					</div>
 
-					<div className="flex-1 min-h-[300px] flex items-center justify-center bg-gray-50">
+					<div className="flex-1 min-h-[200px] sm:min-h-[300px] flex items-center justify-center bg-gray-50">
 						<iframe
 							title="Betsubara Location"
 							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3825.1582960192236!2d121.17645127329365!3d16.51810422726861!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x339041fc16284dad%3A0x7c61943a2e131fb0!2sBetsubara%20Cafe!5e0!3m2!1sen!2sph!4v1748448673553!5m2!1sen!2sph"
 							width="100%"
-							height="320"
-							className="border-0 w-full h-full min-h-[250px] max-w-xl rounded-none"
+							height="220"
+							className="border-0 w-full h-full min-h-[180px] sm:min-h-[250px] max-w-full rounded-none"
 							allowFullScreen=""
 							loading="lazy"
 							referrerPolicy="no-referrer-when-downgrade"
@@ -403,36 +399,36 @@ export default function LandingPage() {
 			{/* Ratings */}
 			<section
 				ref={ratingsRef}
-				className={`w-screen bg-[#ffe4ec] text-black py-12 px-4 flex flex-col items-center transition-all duration-700 ${
+				className={`w-screen bg-[#ffe4ec] text-black py-12 px-2 sm:px-4 flex flex-col items-center transition-all duration-700 ${
 					ratingsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
 				}`}
 				id="ratings"
 			>
 				<div className="w-full max-w-5xl mx-auto">
-					<h2 className="border-l-4 border-black pl-2 text-4xl font-normal mb-4 w-full text-left md:text-left">
+					<h2 className="border-l-4 border-black pl-2 text-3xl sm:text-4xl font-normal mb-4 w-full text-left md:text-left">
 						Customer Ratings
 					</h2>
-					<p className="text-lg text-gray-600 mb-8 w-full max-w-3xl text-left md:text-left">
+					<p className="text-base sm:text-lg text-gray-600 mb-8 w-full max-w-3xl text-left md:text-left">
 						See what our customers are saying about their favorite dishes! Honest reviews and real experiences help you choose your next meal with confidence.
 					</p>
 				</div>
 				<div className="flex justify-center w-full">
 					<div
 						key={currentRating}
-						className="bg-white/90 rounded-2xl shadow-2xl w-full max-w-5xl h-[420px] flex flex-col md:flex-row items-center overflow-hidden mx-4 transition-opacity duration-700"
+						className="bg-white/90 rounded-2xl shadow-2xl w-full max-w-5xl h-auto min-h-[320px] sm:h-[420px] flex flex-col md:flex-row items-center overflow-hidden mx-2 sm:mx-4 transition-opacity duration-700"
 						style={{ opacity: 1 }}
 					>
 						<img
 							src={ratings[currentRating].foodImage}
 							alt={ratings[currentRating].food}
-							className="w-full md:w-1/2 h-60 md:h-full object-cover"
-							style={{ minHeight: 260, maxHeight: 420 }}
+							className="w-full md:w-1/2 h-48 sm:h-60 md:h-full object-cover"
+							style={{ minHeight: 160, maxHeight: 420 }}
 						/>
-						<div className="flex flex-col justify-center flex-1 w-full p-8">
-							<div className="font-bold mb-2 text-[#ffb6d5] text-2xl md:text-3xl">
+						<div className="flex flex-col justify-center flex-1 w-full p-4 sm:p-8">
+							<div className="font-bold mb-2 text-[#ffb6d5] text-xl sm:text-2xl md:text-3xl">
 								{ratings[currentRating].food}
 							</div>
-							<div className="mb-2 text-[#ffb6d5] text-xl flex">
+							<div className="mb-2 text-[#ffb6d5] text-lg sm:text-xl flex">
 								{Array.from({ length: 5 }).map((_, i) => (
 									<span key={i}>
 										{i < ratings[currentRating].stars ? (
@@ -443,7 +439,7 @@ export default function LandingPage() {
 									</span>
 								))}
 							</div>
-							<div className="italic text-lg text-gray-700">
+							<div className="italic text-base sm:text-lg text-gray-700">
 								{ratings[currentRating].comment}
 							</div>
 						</div>
@@ -463,9 +459,9 @@ export default function LandingPage() {
 				</div>
 			</section>
 
-			<footer className="w-screen bg-black text-white text-center py-6 text-base tracking-wide bg-opacity-90">
+			<footer className="w-screen bg-black text-white text-center py-6 text-sm sm:text-base tracking-wide bg-opacity-90 overflow-x-hidden">
 				© {new Date().getFullYear()} Betsubara | Crafted with{" "}
-				<span className="text-pink-300">❀</span> in Nueva Vizcaya
+				<span className="text-pink-300">❀</span> in Nueva Vizcaya || IPT Final Project Delos Santos
 			</footer>
 		</div>
 	);

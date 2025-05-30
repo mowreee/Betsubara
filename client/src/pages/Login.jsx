@@ -10,7 +10,6 @@ export default function Login() {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const navigate = useNavigate();
 
-  // Admin credentials (hardcoded)
   const ADMIN_EMAIL = "admin@gmail.com";
   const ADMIN_PASSWORD = "admin12345";
 
@@ -21,7 +20,6 @@ export default function Login() {
       return;
     }
     setError("");
-    // Check for admin login
     if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
       if (rememberMe) {
         localStorage.setItem("betsubara_admin_email", email);
@@ -34,7 +32,6 @@ export default function Login() {
       }, 1200);
       return;
     }
-    // Otherwise, treat as customer login (no backend check, just redirect)
     setLoginSuccess(true);
     setTimeout(() => {
       navigate("/");
@@ -42,7 +39,6 @@ export default function Login() {
   };
 
   React.useEffect(() => {
-    // Autofill email if remembered
     const savedEmail = localStorage.getItem("betsubara_admin_email");
     if (savedEmail) {
       setEmail(savedEmail);
@@ -51,10 +47,10 @@ export default function Login() {
   }, []);
 
   return (
-    <div className="min-h-screen h-screen overflow-hidden bg-[#fff6fa] flex flex-col items-center justify-center font-['Poppins'] text-[#a85e7c] relative">
+    <div className="min-h-screen h-screen overflow-auto bg-[#fff6fa] flex flex-col items-center justify-center font-['Poppins'] text-[#a85e7c] relative">
       <button
         type="button"
-        className="absolute top-6 left-6 text-[#a85e7c] border border-[#a85e7c] rounded px-3 py-1 text-sm hover:bg-[#ffb6d5] hover:text-white transition"
+        className="absolute left-1/2 -translate-x-1/2 top-4 sm:top-6 sm:left-6 sm:-translate-x-0 text-[#a85e7c] border border-[#a85e7c] rounded px-3 py-1 text-sm hover:bg-[#ffb6d5] hover:text-white transition w-max"
         onClick={() => (window.location.href = "/")}
       >
         &larr; Back to Home
@@ -70,7 +66,7 @@ export default function Login() {
       </div>
       {loginSuccess && (
         <div className="mb-4 px-4 py-2 bg-green-100 border border-green-300 text-green-700 rounded text-center animate-fade-in">
-          Login successful! Redirecting to Admin Dashboard...
+          Login successful!
         </div>
       )}
       <form
@@ -111,7 +107,7 @@ export default function Login() {
           <input
             id="password"
             type={showPassword ? "text" : "password"}
-            placeholder="Ex: admin"
+            placeholder="Password"
             className="border border-[#ffb6d5] bg-[#fff6fa] rounded px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-[#ffb6d5] text-[#a85e7c] placeholder-[#a85e7c]/50"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -187,12 +183,14 @@ export default function Login() {
           </span>
         </div>
       </form>
-      <div className="mt-8 text-[#a85e7c]/70 text-sm text-center">
-        Email:{" "}
-        <span className="font-mono">admin@gmail.com</span>
-        <br />
-        Password:{" "}
-        <span className="font-mono">admin12345</span>
+      {/* Move admin credentials to bottom left on desktop, bottom center on mobile */}
+      <div className="fixed bottom-4 left-4 text-[#a85e7c]/70 text-sm text-left z-30 hidden md:block">
+        Email: <span className="font-mono">admin@gmail.com</span><br />
+        Password: <span className="font-mono">admin12345</span>
+      </div>
+      <div className="mt-8 text-[#a85e7c]/70 text-sm text-center md:hidden">
+        Email: <span className="font-mono">admin@gmail.com</span><br />
+        Password: <span className="font-mono">admin12345</span>
       </div>
     </div>
   );

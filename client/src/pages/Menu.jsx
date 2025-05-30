@@ -21,13 +21,17 @@ export default function Menu() {
 
   return (
     <div className="min-h-screen bg-[#fff6fa] dark:bg-[#2a1a1f] py-12 px-4 font-['Poppins'] text-[#a85e7c] dark:text-[#ffe4ec] flex flex-col items-center">
-      <h1 className="text-4xl font-normal mb-8 text-center">Our Menu</h1>
+      <h1 className="text-4xl font-normal mb-4 text-center">Our Menu</h1>
+      <p className="text-4x1 text-[#fff6fa] mb-10 text-center max-w-2xl mx-auto">
+        Explore our delicious Japanese-inspired dishes, crafted with fresh
+        ingredients and a touch of love. There’s something for every craving—enjoy!
+      </p>
       {loading ? (
         <div>Loading...</div>
       ) : error ? (
         <div className="text-red-500">{error}</div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full max-w-6xl mx-auto">
           {menuItems.map((item) => (
             <MenuCard key={item._id} item={item} />
           ))}

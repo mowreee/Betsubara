@@ -11,10 +11,25 @@ export default function Register() {
   const [registerSuccess, setRegisterSuccess] = useState(false);
   const navigate = useNavigate();
 
+  const validateEmail = (email) => {
+    // Simple email regex
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const validatePassword = (password) => {
+    return /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{7,}$/.test(password);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password || !confirmPassword) {
       setError("Please fill in all fields.");
+      return;
+    } else if (!validateEmail(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    } else if (!validatePassword(password)) {
+      setError("Password must be at least 7 characters, include an uppercase letter, a number, and a special character.");
       return;
     } else if (password !== confirmPassword) {
       setError("Passwords do not match.");
@@ -40,10 +55,10 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen h-screen overflow-hidden bg-[#fff6fa] flex flex-col items-center justify-center font-['Poppins'] text-[#a85e7c] relative">
+    <div className="min-h-screen h-screen overflow-auto bg-[#fff6fa] flex flex-col items-center justify-center font-['Poppins'] text-[#a85e7c] relative">
       <button
         type="button"
-        className="absolute top-6 left-6 text-[#a85e7c] border border-[#a85e7c] rounded px-3 py-1 text-sm hover:bg-[#ffb6d5] hover:text-white transition"
+        className="absolute left-1/2 -translate-x-1/2 top-4 sm:top-6 sm:left-6 sm:-translate-x-0 text-[#a85e7c] border border-[#a85e7c] rounded px-3 py-1 text-sm hover:bg-[#ffb6d5] hover:text-white transition w-max"
         onClick={() => window.location.href = '/'}
       >
         &larr; Back to Home

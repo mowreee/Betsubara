@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
-import reactLogo from './assets/react.svg'
+// import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import LandingPage from './pages/LandingPage'
@@ -17,9 +17,7 @@ import Navbar from './components/Navbar'
 function App() {
   const [count, setCount] = useState(0)
   const location = useLocation();
-  // Hide Navbar on /login, /register, and all /admin routes
   const hideNavbar = location.pathname === '/login' || location.pathname === '/register' || location.pathname.startsWith('/admin');
-  // Show sidebar only on /admin and its subroutes
   const showSidebar = location.pathname.startsWith('/admin');
 
   return (

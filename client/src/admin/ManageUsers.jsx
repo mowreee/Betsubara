@@ -6,6 +6,8 @@ export default function ManageUsers() {
   const [error, setError] = useState("");
   const [editId, setEditId] = useState(null);
   const [editEmail, setEditEmail] = useState("");
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editUser, setEditUser] = useState({ _id: null, email: "" });
 
   useEffect(() => {
     fetch("/api/users")
@@ -33,6 +35,8 @@ export default function ManageUsers() {
   const handleEdit = (user) => {
     setEditId(user._id);
     setEditEmail(user.email);
+    setEditUser({ _id: user._id, email: user.email });
+    setShowEditModal(true);
   };
 
   const handleEditSave = async (id) => {
@@ -40,12 +44,13 @@ export default function ManageUsers() {
       const res = await fetch(`/api/users/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: editEmail }),
+        body: JSON.stringify({ email: editUser.email }),
       });
       if (!res.ok) throw new Error();
       const updated = await res.json();
       setUsers((prev) => prev.map((u) => (u._id === id ? updated : u)));
       setEditId(null);
+      setShowEditModal(false);
     } catch {
       alert("Failed to update user.");
     }
@@ -54,10 +59,11 @@ export default function ManageUsers() {
   const handleEditCancel = () => {
     setEditId(null);
     setEditEmail("");
+    setShowEditModal(false);
   };
 
   return (
-    <div className="p-8 w-full min-h-screen bg-gradient-to-br from-[#fff6fa] via-[#ffe4ec] to-[#f7e1f3] dark:from-[#3a2230] dark:via-[#4a2a3a] dark:to-[#2a1a1f] transition-colors duration-500">
+    <div className="p-8 w-full min-h-screen bg-[#fff6fa]">
       <h1 className="text-3xl font-bold mb-6 text-[#a85e7c] text-center drop-shadow">
         Manage Users
       </h1>
@@ -71,18 +77,49 @@ export default function ManageUsers() {
         </div>
       ) : (
         <div className="overflow-x-auto">
-          <table className="min-w-full bg-white border rounded-2xl shadow-lg text-[#a85e7c]">
+          {showEditModal && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+              <div className="bg-white dark:bg-[#3a2230] rounded-2xl shadow-2xl p-4 sm:p-8 w-full max-w-xs sm:max-w-md relative border-2 border-[#ffb6d5] animate-fade-in mx-2">
+                <button
+                  type="button"
+                  className="absolute top-2 right-2 sm:top-3 sm:right-4 text-[#a85e7c] text-2xl sm:text-3xl font-bold hover:text-[#ffb6d5] focus:outline-none"
+                  onClick={() => { setShowEditModal(false); setEditId(null); setEditEmail(""); }}
+                  aria-label="Close"
+                >
+                  &times;
+                </button>
+                <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-[#a85e7c] dark:text-[#ffe4ec] text-center drop-shadow">Edit User</h2>
+                <form
+                  onSubmit={e => {
+                    e.preventDefault();
+                    // Email validation
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(editUser.email)) {
+                      alert('Please enter a valid email address.');
+                      return;
+                    }
+                    handleEditSave(editUser._id);
+                  }}
+                  className="flex flex-col gap-3 sm:gap-4"
+                >
+                  <input
+                    className="border border-[#ffb6d5] rounded px-3 py-2 focus:ring-2 focus:ring-[#ffb6d5] outline-none w-full bg-[#fff6fa] text-[#a85e7c] text-sm sm:text-base"
+                    value={editUser.email}
+                    onChange={e => setEditUser({ ...editUser, email: e.target.value })}
+                    autoFocus
+                    required
+                  />
+                  <button type="submit" className="bg-[#ffb6d5] text-white px-4 sm:px-6 py-2 rounded-lg font-semibold shadow hover:bg-[#a85e7c] transition text-sm sm:text-base">Save</button>
+                </form>
+              </div>
+            </div>
+          )}
+          <table className="min-w-full bg-white border rounded-2xl shadow-lg text-[#a85e7c] text-sm sm:text-base">
             <thead className="bg-[#ffe4ec] text-[#a85e7c]">
               <tr>
-                <th className="py-3 px-6 border-b font-semibold text-lg">
-                  Email
-                </th>
-                <th className="py-3 px-6 border-b font-semibold text-lg">
-                  Created At
-                </th>
-                <th className="py-3 px-6 border-b font-semibold text-lg">
-                  Actions
-                </th>
+                <th className="py-2 sm:py-3 px-2 sm:px-6 border-b font-semibold text-base sm:text-lg">Email</th>
+                <th className="py-2 sm:py-3 px-2 sm:px-6 border-b font-semibold text-base sm:text-lg">Created At</th>
+                <th className="py-2 sm:py-3 px-2 sm:px-6 border-b font-semibold text-base sm:text-lg">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -91,55 +128,29 @@ export default function ManageUsers() {
                   key={user._id}
                   className={idx % 2 === 0 ? "bg-[#fff6fa]" : "bg-white"}
                 >
-                  <td className="py-3 px-6 border-b align-middle">
-                    {editId === user._id ? (
-                      <input
-                        className="border border-[#ffb6d5] rounded px-3 py-2 focus:ring-2 focus:ring-[#ffb6d5] outline-none w-full bg-[#fff6fa] text-[#a85e7c]"
-                        value={editEmail}
-                        onChange={(e) => setEditEmail(e.target.value)}
-                        autoFocus
-                      />
-                    ) : (
-                      <span className="font-medium">{user.email}</span>
-                    )}
+                  <td className="py-2 sm:py-3 px-2 sm:px-6 border-b align-middle max-w-[120px] sm:max-w-none break-words">
+                    <span className="font-medium">{user.email}</span>
                   </td>
-                  <td className="py-3 px-6 border-b align-middle">
-                    <span className="bg-[#ffe4ec]/60 px-3 py-1 rounded-full text-sm font-mono">
+                  <td className="py-2 sm:py-3 px-2 sm:px-6 border-b align-middle max-w-[180px] sm:max-w-none break-words">
+                    <span className="bg-[#ffe4ec]/60 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-mono">
                       {new Date(user.createdAt).toLocaleString()}
                     </span>
                   </td>
-                  <td className="py-3 px-6 border-b align-middle">
-                    {editId === user._id ? (
-                      <div className="flex gap-2">
-                        <button
-                          className="bg-green-100 text-green-700 px-4 py-1 rounded-lg font-semibold shadow hover:bg-green-200 transition"
-                          onClick={() => handleEditSave(user._id)}
-                        >
-                          Save
-                        </button>
-                        <button
-                          className="bg-gray-100 text-gray-600 px-4 py-1 rounded-lg font-semibold shadow hover:bg-gray-200 transition"
-                          onClick={handleEditCancel}
-                        >
-                          Cancel
-                        </button>
-                      </div>
-                    ) : (
-                      <div className="flex gap-2">
-                        <button
-                          className="bg-[#ffb6d5] text-white px-4 py-1 rounded-lg font-semibold shadow hover:bg-[#a85e7c] transition"
-                          onClick={() => handleEdit(user)}
-                        >
-                          Edit
-                        </button>
-                        <button
-                          className="bg-red-100 text-red-600 px-4 py-1 rounded-lg font-semibold shadow hover:bg-red-200 transition"
-                          onClick={() => handleDelete(user._id)}
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    )}
+                  <td className="py-2 sm:py-3 px-2 sm:px-6 border-b align-middle">
+                    <div className="flex flex-col sm:flex-row gap-2 items-center justify-center">
+                      <button
+                        className="bg-[#ffb6d5] text-white px-3 sm:px-4 py-1 rounded-lg font-semibold shadow hover:bg-[#a85e7c] transition w-full sm:w-auto text-xs sm:text-base"
+                        onClick={() => handleEdit(user)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="bg-red-100 text-red-600 px-3 sm:px-4 py-1 rounded-lg font-semibold shadow hover:bg-red-200 transition w-full sm:w-auto text-xs sm:text-base"
+                        onClick={() => handleDelete(user._id)}
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}

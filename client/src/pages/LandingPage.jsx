@@ -147,7 +147,7 @@ function AnimatedBetsubara() {
 			) : (
 				<span className="transition-opacity duration-700 flex flex-col md:flex-row md:items-end gap-1 md:gap-3">
 					<span>Betsubara</span>
-					<span className="text-2xl md:text-3xl text-[#a85e7c] ml-1 md:ml-2">Cafe</span>
+					<span className="text-2xl md:text-3xl text-[#a85e7c] ml-1 md:ml-2">Café</span>
 				</span>
 			)}
 		</h1>

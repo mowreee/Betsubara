@@ -11,7 +11,7 @@ import taiyaki from "../assets/taiyaki.jpg";
 import yakisoba from "../assets/betsubara-yakisoba.jpg";
 import spicyMisoRamen from "../assets/spicy-miso-ramen.jpg";
 import { Link } from "react-router-dom";
-
+import test from "../assets/test.jpg";
 const featuredMenu = [
 	{
 		name: "Takoyaki",
@@ -182,7 +182,7 @@ export default function LandingPage() {
 			>
 				<div className="hidden md:flex flex-row gap-8 h-[320px] justify-center items-center relative w-1/2 pr-10">
 					<img
-						src={betsubara1st}
+						src={test}
 						alt="Sakura Sushi Platter"
 						className="w-[200px] h-[450px] object-cover shadow-lg animate-slide-down1"
 						style={{
@@ -193,7 +193,7 @@ export default function LandingPage() {
 						height={320}
 					/>
 					<img
-						src={betsubara2nd}
+						src={test}
 						alt="Wagyu Donburi"
 						className="w-[200px] h-[450px] object-cover shadow-lg animate-slide-up"
 						style={{
@@ -204,7 +204,7 @@ export default function LandingPage() {
 						height={320}
 					/>
 					<img
-						src={betsubara3rd}
+						src={test}
 						alt="Matcha Blossom Parfait"
 						className="w-[200px] h-[450px] object-cover shadow-lg animate-slide-down2"
 						style={{

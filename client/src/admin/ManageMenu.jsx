@@ -12,7 +12,7 @@ export default function ManageMenu() {
   const [editMenuItem, setEditMenuItem] = useState({ _id: null, name: "", description: "", price: "", image: "" });
 
   useEffect(() => {
-    fetch("/api/menu")
+    fetch("https://betsubara-backend.vercel.app/api/menu")
       .then((res) => res.json())
       .then((data) => {
         setMenu(data);
@@ -42,7 +42,7 @@ export default function ManageMenu() {
   const handleAdd = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("/api/menu", {
+      const res = await fetch("https://betsubara-backend.vercel.app/api/menu", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newItem),
@@ -59,7 +59,7 @@ export default function ManageMenu() {
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this menu item?")) return;
     try {
-      await fetch(`/api/menu/${id}`, { method: "DELETE" });
+      await fetch(`https://betsubara-backend.vercel.app/api/menu/${id}`, { method: "DELETE" });
       setMenu((prev) => prev.filter((item) => item._id !== id));
     } catch {
       alert("Failed to delete menu item.");
@@ -90,7 +90,7 @@ export default function ManageMenu() {
 
   const handleEditSave = async (id) => {
     try {
-      const res = await fetch(`/api/menu/${id}`, {
+      const res = await fetch(`https://betsubara-backend.vercel.app/api/menu/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(editMenuItem),
@@ -146,43 +146,43 @@ export default function ManageMenu() {
                   }}
                   className="flex flex-col gap-4"
                 >
-                  <input 
-                    name="name" 
-                    value={newItem.name} 
+                  <input
+                    name="name"
+                    value={newItem.name}
                     onChange={e => {
                       // Only allow letters and spaces
                       const val = e.target.value.replace(/[^A-Za-z\s]/g, "");
                       setNewItem({ ...newItem, name: val });
-                    }} 
-                    placeholder="Name" 
-                    className="border border-[#ffb6d5] rounded px-3 py-2 bg-[#fff6fa] dark:bg-[#4a2a3a] text-[#a85e7c] dark:text-[#ffe4ec] focus:ring-2 focus:ring-[#ffb6d5] outline-none" 
-                    required 
+                    }}
+                    placeholder="Name"
+                    className="border border-[#ffb6d5] rounded px-3 py-2 bg-[#fff6fa] dark:bg-[#4a2a3a] text-[#a85e7c] dark:text-[#ffe4ec] focus:ring-2 focus:ring-[#ffb6d5] outline-none"
+                    required
                   />
-                  <input 
-                    name="description" 
-                    value={newItem.description} 
-                    onChange={handleInputChange} 
-                    placeholder="Description" 
-                    className="border border-[#ffb6d5] rounded px-3 py-2 bg-[#fff6fa] dark:bg-[#4a2a3a] text-[#a85e7c] dark:text-[#ffe4ec] focus:ring-2 focus:ring-[#ffb6d5] outline-none" 
-                    required 
+                  <input
+                    name="description"
+                    value={newItem.description}
+                    onChange={handleInputChange}
+                    placeholder="Description"
+                    className="border border-[#ffb6d5] rounded px-3 py-2 bg-[#fff6fa] dark:bg-[#4a2a3a] text-[#a85e7c] dark:text-[#ffe4ec] focus:ring-2 focus:ring-[#ffb6d5] outline-none"
+                    required
                   />
-                  <input 
-                    name="price" 
-                    value={newItem.price} 
+                  <input
+                    name="price"
+                    value={newItem.price}
                     onChange={e => {
                       // Only allow numbers and optional decimal
                       const val = e.target.value.replace(/[^\d.]/g, "");
                       setNewItem({ ...newItem, price: val });
-                    }} 
-                    placeholder="Price" 
-                    className="border border-[#ffb6d5] rounded px-3 py-2 bg-[#fff6fa] dark:bg-[#4a2a3a] text-[#a85e7c] dark:text-[#ffe4ec] focus:ring-2 focus:ring-[#ffb6d5] outline-none" 
-                    required 
+                    }}
+                    placeholder="Price"
+                    className="border border-[#ffb6d5] rounded px-3 py-2 bg-[#fff6fa] dark:bg-[#4a2a3a] text-[#a85e7c] dark:text-[#ffe4ec] focus:ring-2 focus:ring-[#ffb6d5] outline-none"
+                    required
                   />
                   <label className="flex flex-col gap-1">
                     <span className="text-[#a85e7c] dark:text-[#ffe4ec] font-medium">Image</span>
-                    <input 
-                      type="file" 
-                      accept="image/*" 
+                    <input
+                      type="file"
+                      accept="image/*"
                       onChange={e => {
                         const file = e.target.files[0];
                         if (file && file.type.startsWith('image/')) {
@@ -195,9 +195,9 @@ export default function ManageMenu() {
                           e.target.value = null;
                           alert('Please select a valid image file.');
                         }
-                      }} 
-                      className="border border-[#ffb6d5] rounded px-3 py-2 bg-[#fff6fa] dark:bg-[#4a2a3a] text-[#a85e7c] dark:text-[#ffe4ec] focus:ring-2 focus:ring-[#ffb6d5] outline-none" 
-                      required 
+                      }}
+                      className="border border-[#ffb6d5] rounded px-3 py-2 bg-[#fff6fa] dark:bg-[#4a2a3a] text-[#a85e7c] dark:text-[#ffe4ec] focus:ring-2 focus:ring-[#ffb6d5] outline-none"
+                      required
                     />
                   </label>
                   {newItem.image && (
@@ -226,43 +226,43 @@ export default function ManageMenu() {
                   }}
                   className="flex flex-col gap-4"
                 >
-                  <input 
-                    name="name" 
-                    value={editMenuItem.name} 
+                  <input
+                    name="name"
+                    value={editMenuItem.name}
                     onChange={e => {
                       // Only allow letters and spaces
                       const val = e.target.value.replace(/[^A-Za-z\s]/g, "");
                       setEditMenuItem({ ...editMenuItem, name: val });
-                    }} 
-                    placeholder="Name" 
-                    className="border border-[#ffb6d5] rounded px-3 py-2 bg-[#fff6fa] dark:bg-[#4a2a3a] text-[#a85e7c] dark:text-[#ffe4ec] focus:ring-2 focus:ring-[#ffb6d5] outline-none" 
-                    required 
+                    }}
+                    placeholder="Name"
+                    className="border border-[#ffb6d5] rounded px-3 py-2 bg-[#fff6fa] dark:bg-[#4a2a3a] text-[#a85e7c] dark:text-[#ffe4ec] focus:ring-2 focus:ring-[#ffb6d5] outline-none"
+                    required
                   />
-                  <input 
-                    name="description" 
-                    value={editMenuItem.description} 
-                    onChange={handleEditModalChange} 
-                    placeholder="Description" 
-                    className="border border-[#ffb6d5] rounded px-3 py-2 bg-[#fff6fa] dark:bg-[#4a2a3a] text-[#a85e7c] dark:text-[#ffe4ec] focus:ring-2 focus:ring-[#ffb6d5] outline-none" 
-                    required 
+                  <input
+                    name="description"
+                    value={editMenuItem.description}
+                    onChange={handleEditModalChange}
+                    placeholder="Description"
+                    className="border border-[#ffb6d5] rounded px-3 py-2 bg-[#fff6fa] dark:bg-[#4a2a3a] text-[#a85e7c] dark:text-[#ffe4ec] focus:ring-2 focus:ring-[#ffb6d5] outline-none"
+                    required
                   />
-                  <input 
-                    name="price" 
-                    value={editMenuItem.price} 
+                  <input
+                    name="price"
+                    value={editMenuItem.price}
                     onChange={e => {
                       // Only allow numbers and optional decimal
                       const val = e.target.value.replace(/[^\d.]/g, "");
                       setEditMenuItem({ ...editMenuItem, price: val });
-                    }} 
-                    placeholder="Price" 
-                    className="border border-[#ffb6d5] rounded px-3 py-2 bg-[#fff6fa] dark:bg-[#4a2a3a] text-[#a85e7c] dark:text-[#ffe4ec] focus:ring-2 focus:ring-[#ffb6d5] outline-none" 
-                    required 
+                    }}
+                    placeholder="Price"
+                    className="border border-[#ffb6d5] rounded px-3 py-2 bg-[#fff6fa] dark:bg-[#4a2a3a] text-[#a85e7c] dark:text-[#ffe4ec] focus:ring-2 focus:ring-[#ffb6d5] outline-none"
+                    required
                   />
                   <label className="flex flex-col gap-1">
                     <span className="text-[#a85e7c] dark:text-[#ffe4ec] font-medium">Image</span>
-                    <input 
-                      type="file" 
-                      accept="image/*" 
+                    <input
+                      type="file"
+                      accept="image/*"
                       onChange={e => {
                         const file = e.target.files[0];
                         if (file && file.type.startsWith('image/')) {
@@ -275,8 +275,8 @@ export default function ManageMenu() {
                           e.target.value = null;
                           alert('Please select a valid image file.');
                         }
-                      }} 
-                      className="border border-[#ffb6d5] rounded px-3 py-2 bg-[#fff6fa] dark:bg-[#4a2a3a] text-[#a85e7c] dark:text-[#ffe4ec] focus:ring-2 focus:ring-[#ffb6d5] outline-none" 
+                      }}
+                      className="border border-[#ffb6d5] rounded px-3 py-2 bg-[#fff6fa] dark:bg-[#4a2a3a] text-[#a85e7c] dark:text-[#ffe4ec] focus:ring-2 focus:ring-[#ffb6d5] outline-none"
                     />
                   </label>
                   {editMenuItem.image && (

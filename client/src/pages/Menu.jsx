@@ -7,7 +7,7 @@ export default function Menu() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch("/api/menu")
+    fetch("https://betsubara-backend.vercel.app/api/menu")
       .then((res) => res.json())
       .then((data) => {
         setMenuItems(data);

@@ -7,12 +7,12 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     // Fetch users
-    fetch("/api/users")
+    fetch("https://betsubara-backend.vercel.app/api/users")
       .then((res) => res.json())
       .then((data) => setUserCount(Array.isArray(data) ? data.length : 0))
       .catch(() => setUserCount(0));
     // Fetch menu items
-    fetch("/api/menu")
+    fetch("https://betsubara-backend.vercel.app/api/menu")
       .then((res) => res.json())
       .then((data) => setMenuCount(Array.isArray(data) ? data.length : 0))
       .catch(() => setMenuCount(0));

@@ -10,7 +10,7 @@ import betsubaraPhilosophy from "../assets/betsubara-philosophy.jpg";
 import taiyaki from "../assets/taiyaki.jpg";
 import yakisoba from "../assets/betsubara-yakisoba.jpg";
 import spicyMisoRamen from "../assets/spicy-miso-ramen.jpg";
-
+import { Link } from "react-router-dom";
 const featuredMenu = [
 	{
 		name: "Takoyaki",
@@ -48,31 +48,31 @@ const featuredMenu = [
 		name: "Yakisoba",
 		description: "A savory stir-fried noodle dish, Yakisoba features chewy wheat noodles cooked with a medley of vegetables and your choice of protein, all tossed in a tangy sauce.",
 		price: "₱199",
-		image: yakisoba, 
+		image: yakisoba,
 	},
 	{
 		name: "Tantanmen",
 		description: "A spicy noodle dish, Tantanmen features a rich sesame and chili oil broth, served with chewy noodles, ground pork, bok choy, and a soft-boiled egg.",
 		price: "₱295",
-		image: yakisoba, 
+		image: yakisoba,
 	},
 	{
 		name: "Mayu Ramen",
 		description: "Mayu Ramen is a flavorful ramen dish made with rich tonkotsu broth and topped with mayu—aromatic black garlic oil—adding a deep, smoky flavor, along with tender pork, noodles, green onions, and a soft-boiled egg.",
 		price: "₱275",
-		image: yakisoba, 
+		image: yakisoba,
 	},
 	{
 		name: "Salmon Aburi Roll",
 		description: "Mouthwatering salmon belly is lightly seared and served on a bed of sushi rice, topped with a drizzle of spicy mayo and a sprinkle of sesame seeds.",
 		price: "₱350(/8 pcs)",
-		image: yakisoba, 
+		image: yakisoba,
 	},
 	{
 		name: "Bento Box",
 		description: "Bento is a traditional Japanese single-portion meal box, artfully arranged with a balanced variety of dishes such as rice, grilled meat or fish, pickled vegetables, and side items, perfect for a convenient and satisfying meal.",
 		price: "₱800",
-		image: yakisoba, 
+		image: yakisoba,
 	},
 ];
 
@@ -176,9 +176,8 @@ export default function LandingPage() {
 		<div className="font-['Poppins'], font-sans bg-white text-black w-screen min-h-screen overflow-x-hidden">
 			<section
 				ref={welcomeRef}
-				className={`w-screen min-h-[80vh] flex flex-col md:flex-row items-center justify-center bg-white relative overflow-hidden px-4 md:px-24 lg:px-32 xl:px-48 2xl:px-64 transition-all duration-700 ${
-					welcomeVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-				}`}
+				className={`w-screen min-h-[80vh] flex flex-col md:flex-row items-center justify-center bg-white relative overflow-hidden px-4 md:px-24 lg:px-32 xl:px-48 2xl:px-64 transition-all duration-700 ${welcomeVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+					}`}
 			>
 				<div className="hidden md:flex flex-row gap-8 h-[320px] justify-center items-center relative w-1/2 pr-10">
 					<img
@@ -221,19 +220,18 @@ export default function LandingPage() {
 					<p className="text-xl md:text-2xl text-gray-700 mb-6">
 						"We bring Japan closer to your hearts "
 					</p>
-					<a
-						href="/menu"
+					<Link
+						to="/menu"
 						className="inline-block mt-2 px-8 py-3 rounded-full bg-[#ffb6d5] text-white font-semibold text-lg shadow-md hover:bg-[#ff8fcf] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#ffb6d5] focus:ring-offset-2"
 					>
 						View Our Menu
-					</a>
+					</Link>
 				</div>
 			</section>
 			<section
 				ref={favMenuRef}
-				className={`w-screen py-16 px-2 sm:px-4 bg-white flex flex-col items-center transition-all duration-700 ${
-					favMenuVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-				}`}
+				className={`w-screen py-16 px-2 sm:px-4 bg-white flex flex-col items-center transition-all duration-700 ${favMenuVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+					}`}
 			>
 				<h2 className="text-3xl md:text-4xl font-bold text-black mb-2">
 					Our Favorite Menu
@@ -273,9 +271,8 @@ export default function LandingPage() {
 
 			<section
 				ref={storyRef}
-				className={`w-screen py-25 px-2 sm:px-4 bg-white/90 flex flex-col md:flex-row items-center md:items-start min-h-[500px] transition-all duration-700 ${
-					storyVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-				}`}
+				className={`w-screen py-25 px-2 sm:px-4 bg-white/90 flex flex-col md:flex-row items-center md:items-start min-h-[500px] transition-all duration-700 ${storyVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+					}`}
 				id="story"
 			>
 				<div className="flex-1 flex flex-col justify-center mb-8 md:mb-0 md:mr-8 items-center md:items-start">
@@ -308,9 +305,8 @@ export default function LandingPage() {
 			{/* Featured Menu Items */}
 			<section
 				ref={menuRef}
-				className={`w-screen bg-black/5 text-black py-12 px-4 flex flex-col items-center transition-all duration-700 ${
-					menuVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-				}`}
+				className={`w-screen bg-black/5 text-black py-12 px-4 flex flex-col items-center transition-all duration-700 ${menuVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+					}`}
 				id="menu"
 			>
 				<h2 className="border-l-4 border-black-300 pl-2 text-3xl md:text-4xl font-normal mb-8 md:mb-10 w-full text-left">
@@ -360,9 +356,8 @@ export default function LandingPage() {
 
 			<section
 				ref={locationRef}
-				className={`w-screen py-16 sm:py-30 px-2 sm:px-4 bg-white/90 flex justify-center items-center transition-all duration-700 ${
-					locationVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-				}`}
+				className={`w-screen py-16 sm:py-30 px-2 sm:px-4 bg-white/90 flex justify-center items-center transition-all duration-700 ${locationVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+					}`}
 				id="location"
 			>
 				<div className="w-full max-w-7xl bg-white rounded-2xl shadow-2xl flex flex-col md:flex-row overflow-hidden scale-100 md:scale-105">
@@ -405,9 +400,8 @@ export default function LandingPage() {
 			{/* Ratings */}
 			<section
 				ref={ratingsRef}
-				className={`w-screen bg-[#ffe4ec] text-black py-12 px-2 sm:px-4 flex flex-col items-center transition-all duration-700 ${
-					ratingsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-				}`}
+				className={`w-screen bg-[#ffe4ec] text-black py-12 px-2 sm:px-4 flex flex-col items-center transition-all duration-700 ${ratingsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+					}`}
 				id="ratings"
 			>
 				<div className="w-full max-w-5xl mx-auto">
@@ -456,9 +450,8 @@ export default function LandingPage() {
 						<button
 							key={idx}
 							onClick={() => setCurrentRating(idx)}
-							className={`w-3 h-3 rounded-full ${
-								idx === currentRating ? "bg-[#ffb6d5]" : "bg-gray-300"
-							}`}
+							className={`w-3 h-3 rounded-full ${idx === currentRating ? "bg-[#ffb6d5]" : "bg-gray-300"
+								}`}
 							aria-label={`Go to rating ${idx + 1}`}
 						/>
 					))}

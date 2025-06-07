@@ -10,7 +10,7 @@ export default function ManageUsers() {
   const [editUser, setEditUser] = useState({ _id: null, email: "" });
 
   useEffect(() => {
-    fetch("/api/users")
+    fetch("https://betsubara-backend.vercel.app/api/users")
       .then((res) => res.json())
       .then((data) => {
         setUsers(data);
@@ -25,7 +25,7 @@ export default function ManageUsers() {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this user?")) return;
     try {
-      await fetch(`/api/users/${id}`, { method: "DELETE" });
+      await fetch(`https://betsubara-backend.vercel.app/api/users/${id}`, { method: "DELETE" });
       setUsers((prev) => prev.filter((u) => u._id !== id));
     } catch {
       alert("Failed to delete user.");
@@ -41,7 +41,7 @@ export default function ManageUsers() {
 
   const handleEditSave = async (id) => {
     try {
-      const res = await fetch(`/api/users/${id}`, {
+      const res = await fetch(`https://betsubara-backend.vercel.app/api/users/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: editUser.email }),

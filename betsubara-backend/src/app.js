@@ -21,3 +21,5 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+module.exports = app; // Export the app for use in other modules, like tests or serverless functions

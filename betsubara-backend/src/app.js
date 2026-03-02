@@ -18,6 +18,11 @@ app.get('/', (req, res) => {
   res.send('Welcome to Betsubara API');
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+// Only listen locally; Vercel handles this in serverless mode
+if (process.env.VERCEL !== '1') {
+  app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;

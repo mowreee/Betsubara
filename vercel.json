@@ -7,17 +7,9 @@
       "config": {
         "distDir": "dist"
       }
-    },
-    {
-      "src": "betsubara-backend/src/app.js",
-      "use": "@vercel/node"
     }
   ],
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "betsubara-backend/src/app.js"
-    },
     {
       "handle": "filesystem"
     },
